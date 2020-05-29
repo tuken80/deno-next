@@ -7,9 +7,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: curl -fsSL https://deno.land/x/install/install.sh | sh
-      - run: echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
-      - run: export PATH="~/.deno/bin:$PATH"
+      - run: curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
       - run: deno fmt
       - run: deno fmt --check

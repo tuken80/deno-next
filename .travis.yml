@@ -1,9 +1,9 @@
 language: node_js
 script:
-  - curl -L https://deno.land/x/install/install.sh | sh -s $(DENO_VERSION)
+  - curl -fsSL https://deno.land/x/install/install.sh | sh
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
   - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
-  - deno${{ parameters.exe_suffix }} run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
+  - deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
   # - export START_TIME=$(date +%s)
   # - deno${{ parameters.exe_suffix }} run --allow-run --allow-net --allow-write --allow-read --allow-env --config=tsconfig.test.json ./testing/runner.ts --exclude node_modules,**/testdata
   # - deno${{ parameters.exe_suffix }} run --allow-run --allow-read .ci/check_source_file_changes.ts $START_TIME

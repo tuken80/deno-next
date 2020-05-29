@@ -3,8 +3,8 @@ before_install:
   - curl -fsSL https://deno.land/x/install/install.sh | sh
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
   - export PATH="$HOME/.deno/bin:$PATH"
-  - vim ~/.bashrc
-  - vim ~/.zshrc
+  - mkdir ~/.bashrc
+  - mkdir ~/.zshrc
 install:
   - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
 

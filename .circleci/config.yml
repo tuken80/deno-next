@@ -11,8 +11,7 @@ jobs:
       - run: export PATH="$DENO_INSTALL/bin:$PATH"
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
       - run: sudo npm install -g prettier
-      - run: prettier --check **/*.md **/*.{js,ts,jsx,tsx,html}
-      - run: prettier --check **/*.md **/*.{js,ts,jsx,tsx,html} --write
+      - run: prettier --check **/*.md **/*.{ts}
       - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
 workflows:
     build-and-test:

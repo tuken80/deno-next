@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: curl -fsSL https://deno.land/x/install/install.sh | sh
+            - run: echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
+            - run: export PATH="$HOME/.deno/bin:$PATH"
+            - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
+            - run: deno fmt
+            - run: deno fmt --check
+            - run: prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx}
+            - run: prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx} --write
+            - run: eslint --ext .js,.jsx,.ts,.tsx util/ pages/ components/
+            - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test

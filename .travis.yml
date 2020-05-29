@@ -1,11 +1,8 @@
 language: node_js
-before_install: 
+script:
   - curl -L https://deno.land/x/install/install.sh | sh -s $(DENO_VERSION)
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
-install: 
   - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
-
-script:
   - deno${{ parameters.exe_suffix }} run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
   # - export START_TIME=$(date +%s)
   # - deno${{ parameters.exe_suffix }} run --allow-run --allow-net --allow-write --allow-read --allow-env --config=tsconfig.test.json ./testing/runner.ts --exclude node_modules,**/testdata

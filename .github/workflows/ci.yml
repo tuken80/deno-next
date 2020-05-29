@@ -2,8 +2,12 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: circleci/node@1.1.6
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
       - run: curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh
       - run: export PATH="$DENO_INSTALL/bin:$PATH"
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier

@@ -4,7 +4,6 @@ jobs:
     runs-on: ubuntu-lasted
     container: circleci/node@1.1.6
     steps:
-      - checkout
       - run: curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh
       - run: export PATH="$DENO_INSTALL/bin:$PATH"
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier

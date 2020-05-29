@@ -1,6 +1,7 @@
 language: node_js
 script:
-  - curl -fsSL https://deno.land/x/install/install.sh | sh
+  - curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL = /usr/sh local
+  - vim ~/.bashrc
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
   - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
   - deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check

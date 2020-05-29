@@ -10,7 +10,7 @@ jobs:
       - run: curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh
       - run: export PATH="$DENO_INSTALL/bin:$PATH"
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
-      - run: npm install -g prettier
+      - run: sudo npm install -g prettier
       - run: prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx}
       - run: prettier --check **/*.md {util,public,pages,components}/**/*.{js,ts,jsx,tsx} {util,public,pages,components}/*.{js,ts,jsx,tsx} --write
       - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check

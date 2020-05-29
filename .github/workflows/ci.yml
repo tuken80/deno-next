@@ -1,9 +1,8 @@
-version: 2.1
-on: [push]
+on: [push, pull_request]
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  build:
+    runs-on: ubuntu-lasted
+    container: circleci/node@1.1.6
     steps:
       - checkout
       - run: curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh
@@ -12,7 +11,3 @@ jobs:
       - run: sudo npm install -g prettier
       - run: prettier --check .
       - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
-workflows:
-  build-and-test:
-    jobs:
-      - build-and-test

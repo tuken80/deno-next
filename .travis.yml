@@ -1,10 +1,9 @@
 language: node_js
 before_install: 
-  - npm install eslint@$(ESLINT_VERSION) typescript@$(TS_VERSION) @typescript-eslint/eslint-plugin@$(TS_ESLINT_VERSION) @typescript-eslint/parser@$(TS_ESLINT_VERSION) eslint-config-prettier
   - curl -L https://deno.land/x/install/install.sh | sh -s $(DENO_VERSION)
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
 install: 
-  - npx eslint "**/*.ts" --max-warnings=0
+  - npm install eslint@$(ESLINT_VERSION) typescript@$(TS_VERSION) @typescript-eslint/eslint-plugin@$(TS_ESLINT_VERSION) @typescript-eslint/parser@$(TS_ESLINT_VERSION) eslint-config-prettier
 
 script:
   - deno${{ parameters.exe_suffix }} run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check

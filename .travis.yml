@@ -1,5 +1,5 @@
 language: node_js
-before_install: 
+before_install:
   - curl -fsSL https://deno.land/x/install/install.sh | sh
   - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
   - export PATH="$HOME/.deno/bin:$PATH"

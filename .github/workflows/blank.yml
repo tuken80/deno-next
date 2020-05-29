@@ -14,6 +14,6 @@ jobs:
       - run: prettier --check .
       - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test

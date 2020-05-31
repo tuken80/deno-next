@@ -5,7 +5,6 @@ import { Component } from "../../mod.ts";
   template: `Toolbar`,
 })
 export class ToolbarComponent {
-  constructor() {
-    return "oi";
-  }
+  are = "a";
+  constructor() {}
 }

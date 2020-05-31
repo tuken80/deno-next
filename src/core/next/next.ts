@@ -10,11 +10,13 @@ import { Route, RouteItem } from "../interfaces/route.ts";
 // import * as domTypes from "https://raw.githubusercontent.com/ry/deno/494a7950a985c989e79a220cf350221a8c7d0f96/js/dom_types.ts";
 // import { DomHandler } from "https://deno.land/x/domhandler/mod.ts";
 import { ObjectHelper } from "../helpers/objectHelper.ts";
+import { ErrorHandler } from "../handler/errorHandler.ts";
 
 class NextBrowser {
   next: any;
-  _routes = new BehaviorSubject<Route>(new Array(new RouteItem()));
-  routes = this._routes.asObservable();
+  _routes: any;
+  // _routes = new BehaviorSubject<Route>(new Array(new RouteItem()));
+  // routes = this._routes.asObservable();
 
   constructor() {}
 
@@ -23,17 +25,34 @@ class NextBrowser {
     defaultSelector: string = "next-app"
   ): Observable<any> {
     return new Observable((subscriber: any) => {
-      this._routes.next(ObjectHelper.extractRouter(routes, "child"));
+      this._routes = ObjectHelper.extractRouter(routes, "child");
       const app = new Application();
       app.use(async (ctx: any, next) => {
         const host = ctx.request.headers.get("Host");
         await next();
-        console.log(`${ctx.request.method} ${ctx.request.url}`);
-        console.log(ctx.request.url.toString().split(host)[1].substring(1));
-        ctx.response = {
-          type: "html",
-          body: `<script>window.history.pushState({},"","/");</script>`,
-        };
+        const url = ctx.request.url.pathname.substring(1);
+        let activeRoute = await this._routes.find((x: any) => x.path === url);
+        if (activeRoute) {
+          activeRoute = new activeRoute.component();
+          console.log(
+            activeRoute._next_ComponentDecoratorGetAllParams.template
+          );
+          ctx.response.type = "html";
+          ctx.response.body =
+            activeRoute._next_ComponentDecoratorGetAllParams.template;
+        } else {
+          if (url.length > 0) {
+            ctx.response.type = "html";
+            ctx.response.body =
+              `<script>console.error(` +
+              "`" +
+              ErrorHandler.routeNotFound(url) +
+              "`" +
+              `),window.history.pushState({},"","/")</script>`;
+          } else {
+            ctx.response.body = "";
+          }
+        }
       });
 
       app.listen({ port: 8000 });

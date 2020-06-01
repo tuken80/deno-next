@@ -14,4 +14,4 @@ jobs:
       - run: npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
       - run: sudo npm install -g prettier
       - run: prettier --check .
-      - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.ts --check
+      - run: deno run --allow-run --allow-write --allow-read --allow-env ./mod.js --check

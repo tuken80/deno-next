@@ -7,4 +7,4 @@ install:
   - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
 
 script:
-  - deno run --allow-run --allow-write --allow-read --allow-env mod.js --check
+  - deno run --allow-run --allow-write --allow-read --allow-env https://deno.land/x/next/mod.js --check

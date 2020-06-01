@@ -9,13 +9,13 @@ class NextBrowser {
     this._defaultRoutes = new Array();
   }
 
-  bootstrap(
-    html = '',
-    config = {}
-  ) {
+  bootstrap(html = "", config = {}) {
     return new Observable((subscriber) => {
-      if(typeof config.routing.routes !== undefined) {
-        this._routes = ObjectHelper.extractRouter(config.routing.routes, "child");
+      if (typeof config.routing.routes !== undefined) {
+        this._routes = ObjectHelper.extractRouter(
+          config.routing.routes,
+          "child"
+        );
       }
       const app = new Application();
       app.use(async (ctx, next) => {
@@ -23,45 +23,52 @@ class NextBrowser {
           {
             type: "application/javascript",
             path: "next.script.js",
-            content: NextFile('next.script.js', import.meta.url),
+            content: NextFile("next.script.js", import.meta.url),
           },
         ];
         await next();
         const url = ctx.request.url.pathname.substring(1);
-        let activeIsDefaultRoute = await this._defaultRoutes.find((x) => x.path === url);
-        if(!activeIsDefaultRoute) {
+        let activeIsDefaultRoute = await this._defaultRoutes.find(
+          (x) => x.path === url
+        );
+        if (!activeIsDefaultRoute) {
           let activeRoute = await this._routes.find((x) => x.path === url);
           if (activeRoute) {
             const activeRoutes = new activeRoute.component();
             ctx.response = Object.assign(ctx.response, {
-              type: 'html',
-              body: this.insertNextInPage(html)
+              type: "html",
+              body: this.insertNextInPage(html),
             });
           } else {
             if (url.length > 0) {
-                ctx.response = Object.assign(ctx.response, {
-                  type: 'html',
-                  body: `<script>console.error(` +
+              ctx.response = Object.assign(ctx.response, {
+                type: "html",
+                body:
+                  `<script>console.error(` +
                   "`" +
                   ErrorHandler.routeNotFound(url) +
                   "`" +
-                  `),window.history.pushState({},"","/")</script>`
-                });
+                  `),window.history.pushState({},"","/")</script>`,
+              });
             } else {
               console.log(config.routing.errors[404]);
-              if(typeof config.routing.errors[404] !== undefined) {
+              if (typeof config.routing.errors[404] !== undefined) {
                 ctx.response = Object.assign(ctx.response, {
-                  type: 'html',
-                  body: `<script>window.history.pushState({},"","/`+config.routing.errors[404]+`")</script>`
+                  type: "html",
+                  body:
+                    `<script>window.history.pushState({},"","/` +
+                    config.routing.errors[404] +
+                    `")</script>`,
                 });
               } else {
                 ctx.response = Object.assign(ctx.response, {
-                  type: 'html',
-                  body: `<script>console.error(` +
-                  "`" +
-                  ErrorHandler.routeNotFound(url) +
-                  "`" +
-                  `),window.history.pushState({},"","/")</script>`
+                  type: "html",
+                  body:
+                    `<script>console.error(` +
+                    "`" +
+                    ErrorHandler.routeNotFound(url) +
+                    "`" +
+                    `),window.history.pushState({},"","/")</script>`,
                 });
               }
             }
@@ -73,15 +80,19 @@ class NextBrowser {
       });
 
       app.listen({ port: 8000 });
-      subscriber.next()
+      subscriber.next();
     });
   }
 
-  insertNextInPage(html = ''){
+  insertNextInPage(html = "") {
     let nextHtml = html.split("</body>");
-    nextHtml.splice(1,0, `<script src="next.script.js"></script> </body>`)
-    html = nextHtml.join('').replace('\n', '').replace('\u0000', '').replace(`'/>\s*</', '><'`, '');
-    return html
+    nextHtml.splice(1, 0, `<script src="next.script.js"></script> </body>`);
+    html = nextHtml
+      .join("")
+      .replace("\n", "")
+      .replace("\u0000", "")
+      .replace(`'/>\s*</', '><'`, "");
+    return html;
   }
 }
 

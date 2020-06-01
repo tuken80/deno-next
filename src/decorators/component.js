@@ -1,5 +1,5 @@
 export class Component {
   constructor() {
-    this.selector = '';
+    this.selector = "";
   }
-};
+}

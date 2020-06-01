@@ -1,13 +1,12 @@
-import { Component } from '../../mod.js';
+import { Component } from "../../mod.js";
 
 export class ToolbarComponent extends Component {
-  
   constructor() {
     super();
-    this.selector = "toolbar"
-   }
+    this.selector = "toolbar";
+  }
 
   alow() {
-    return "ui"
+    return "ui";
   }
 }

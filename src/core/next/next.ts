@@ -18,14 +18,12 @@ export { jsx as Next } from "https://raw.githubusercontent.com/apiel/jsx-html/la
 export class Browser {
   application: Application;
 
-  constructor(
-    element: any,
-  ) {
+  constructor(element: any) {
     this.application = new Application();
     this.application.use(async (ctx) => {
       const { response, request } = ctx;
       response.type = "html";
-      response.body = await (element).render();
+      response.body = await element.render();
     });
     this.listen();
   }

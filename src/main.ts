@@ -1,4 +1,3 @@
-export { Next } from "./core/next/next.js";
+export { Next, Browser } from "./core/next/next.ts";
 export { Component } from "./decorators/component.js";
 export { NextFile } from "./core/next/file.js";
-console.log("OK");

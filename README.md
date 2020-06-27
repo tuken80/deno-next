@@ -4,9 +4,11 @@
 
 Build easy, build fast, build next.
 
-Based on reactjs technologies, next came to the deno as a way to quickly develop your applications, without having a high line of learning.
+Based on ReactJS, next came to the deno as a way to quickly develop your applications, without having a high line of learning.
 
 ### We are currently undergoing restructuring in our framework, and we ask that it not be used at the moment
+
+Unfortunately we do not yet have support for DOM JavaScript functionality, nor dynamic functionality, this will possibly be implemented soon.
 
 # Using
 

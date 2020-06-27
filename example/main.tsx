@@ -1,4 +1,4 @@
-import { React, Browser } from "../mod.ts";
+import { React, Browser } from "https://deno.land/x/next/mod.ts";
 
 function Footer() {
   return <div>Footer Next</div>;
@@ -6,21 +6,12 @@ function Footer() {
 
 class View {
   techs = ["Next", "Deno"];
-  tech = "";
-
-  setTech(techName: any) {
-    this.techs.filter((item) => {
-      console.log(item);
-    });
-  }
-
   render() {
     return (
       <ul>
         {this.techs.map((tech: any) => (
           <li>
             {tech}
-            <button onclick={this.setTech} aloha>x</button>
           </li>
         ))}
 

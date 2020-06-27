@@ -10,9 +10,7 @@ class View {
     return (
       <ul>
         {this.techs.map((tech: any) => (
-          <li>
-            {tech}
-          </li>
+          <li>{tech}</li>
         ))}
 
         <Footer />

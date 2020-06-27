@@ -22,7 +22,7 @@ export class Browser {
       const render = await element.renderElement();
       const main = await File(
         this.config.config.main + ".html",
-        this.config.config.path,
+        this.config.config.path
       );
       response.type = "html";
       response.body = InsertDOM(main, render, this.config.container);
@@ -36,19 +36,20 @@ export class Browser {
       ({ hostname, port, secure }) => {
         console.log(
           Color.green.text(
-            `Listening on: ${secure ? "https://" : "http://"}${hostname ??
-              "localhost"}:${port}`,
-          ),
+            `Listening on: ${secure ? "https://" : "http://"}${
+              hostname ?? "localhost"
+            }:${port}`
+          )
         );
-      },
+      }
     );
 
-    this.application.listen({ port: this.config.config.port }).catch(
-      (error) => {
+    this.application
+      .listen({ port: this.config.config.port })
+      .catch((error) => {
         console.error(Color.red.text(error));
         Deno.exit(1);
-      },
-    );
+      });
   }
 
   loadConfig() {

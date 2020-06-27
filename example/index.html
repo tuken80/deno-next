@@ -13,7 +13,9 @@
 
       body {
         font-family: sans-serif;
+        padding: 12px;
         font-weight: 300;
+        background-color: #eee;
       }
 
       h1 {
@@ -23,30 +25,26 @@
         color: slateblue;
       }
 
-      p {
-        margin-bottom: 2rem;
-        font-size: 1.5rem;
-        color: #282828;
-      }
-
       header {
-        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: #eee;
+        padding: 10px;
+      }
+
+      .logo {
+        width: 150px;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>
-        <img
-          src="https://user-images.githubusercontent.com/42474938/83287992-06016d80-a1b9-11ea-8757-f4dee0e1d0df.png"
-        />
-      </h1>
-      <next-app></next-app>
+      <img
+        class="logo"
+        src="https://user-images.githubusercontent.com/42474938/83287992-06016d80-a1b9-11ea-8757-f4dee0e1d0df.png"
+      />
     </header>
+    <app></app>
   </body>
 </html>

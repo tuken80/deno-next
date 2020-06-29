@@ -1,7 +1,7 @@
 # [<img src="https://user-images.githubusercontent.com/42474938/83287992-06016d80-a1b9-11ea-8757-f4dee0e1d0df.png" width="80" />](https://next.mtwzim.now.sh) [![Build Status](https://travis-ci.com/mtwzim/next.svg?branch=master)](https://travis-ci.com/mtwzim/next) [![Next](https://circleci.com/gh/mtwzim/next.svg?style=svg)](https://circleci.com/gh/mtwzim/next.svg?style=svg) [![Build Status Github](https://github.com/mtwzim/next/workflows/CI/badge.svg)](https://github.com/mtwzim/next/actions) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier) [![License](https://img.shields.io/github/license/mtwzim/next)](https://github.com/mtwzim/next/blob/master/LICENSE)
 
 [Next](https://next.denobr.now.sh/) is a new front-end framework for deno.
-
+[Discord](https://discord.com/invite/a92xZcw)
 Build easy, build fast, build next.
 
 Based on ReactJS, next came to the deno as a way to quickly develop your applications, without having a high line of learning.

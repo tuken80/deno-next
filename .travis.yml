@@ -1,10 +1,21 @@
-language: node_js
+sudo: required
+
+services:
+  - docker
+
 before_install:
-  - curl -fsSL https://deno.land/x/install/install.sh | sh
-  - echo '##vso[task.prependpath]$(HOME)/.deno/bin/'
-  - export PATH="$HOME/.deno/bin:$PATH"
-install:
-  - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
+  - docker build -t fhsinchy/deno-blog .
+
+#install:
+#  - npm install eslint typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier
 
 script:
-  - deno run --allow-run --allow-write --allow-read --allow-env https://deno.land/x/next/mod.ts --check
+  - docker run fhsinchy/deno-blog run --allow-run --allow-write --allow-read --allow-env https://deno.land/x/next/mod.ts --check
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 3508c7754b9b051d2314858ea3dcb213a1d84beb
+  keep_history: true
+  on:
+    branch: master

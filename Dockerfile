@@ -1,4 +1,4 @@
-FROM hayd/alpine-deno:1.1.2
+FROM hayd/alpine-deno:1.1.1
 
 EXPOSE 80
 
